@@ -1,83 +1,130 @@
 # RoBDEMAT Visualizer
 
-Upload-and-visualize tool for risk-of-bias assessments already made
-with RoBDEMAT (Delgado et al., *J Dent* 2022;127:104350,
-https://doi.org/10.1016/j.jdent.2022.104350).
+A web tool for producing high-quality figures from **RoBDEMAT** (Risk of
+Bias Tool for Pre-clinical Dental Materials Research) assessments.
 
-## Features
+You enter (or upload) the judgements you have already made for each study,
+and the app draws publication-ready **traffic light** and **summary** plots
+that you can customise and export as PNG or TIFF.
 
-- **Upload & edit data**: upload CSV/Excel, or start from the
-  downloadable template. Study names are free text (vertically
-  centered); every judgement cell is a **dropdown** for both
-  uploaded and manually added rows. Right-click a row for more
-  options (insert/remove row).
-- **Traffic light plot**: table-style grid with "RoBDEMAT domains"
-  as a spanning title above the item columns, and "Study" as a
-  rotated label to the left of the table. Grey header row (item
-  numbers 1.1–4.2), grey study-name column sized to the longest
-  name, gridlines throughout, and a footnote with each domain title
-  on its own line followed by its items on the line below. Each
-  circle carries a black +/-/x symbol. Customize font, font size,
-  circle size, per-category colour and legend text, with "Default"
-  and "Colour-blind friendly" resets. Export at custom width/
-  height/DPI as PNG or TIFF.
-- **Summary plot**: original stacked-bar logic (plain `count()`, no
-  gridline reworking) reordered so item 1.1 is at the top through
-  4.2 at the bottom, with the same customization layered on top as
-  the traffic light plot (font, font size, per-category colour,
-  legend text, Default / Colour-blind-friendly buttons, PNG/TIFF
-  export at custom size/DPI).
+![Example RoBDEMAT traffic light figure](www/example_figure.png)
 
-## Expected input format
+## How to use
 
-| Study        | 1.1 | 1.2 | 1.3 | 2.1 | 2.2 | 3.1 | 3.2 | 4.1 | 4.2 |
-|--------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-| Author 2020  | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+1. **Download the Excel template** from the Home tab (or from the
+   "Upload & edit data" tab).
+2. **Enter your assessment data.** Replace the example studies with your own:
+   - one study per row;
+   - first column = study name;
+   - one judgement per RoBDEMAT item (columns `1.1` to `4.2`);
+   - keep the column headings and format unchanged.
+3. **Upload the completed file** on the "Upload & edit data" tab (click
+   **Start** on the Home tab to get there).
+4. **Check or edit the data in the table** if needed (see below).
+5. Open the **Traffic light plot** or **Summary plot** tab, adjust the
+   appearance, and **download** the figure.
 
-Cell values on upload: full judgement text, or these codes —
-`S`/`Sufficiently reported`/`Adequate`, `I`, `N`/`Not reported`/
-`Not adequate`, `NA`/`N/A`/`Not applicable`. Once in the app, edits
-go through the dropdown only.
+### Judgements
 
-## Run it locally
+Use one of four codes in every cell:
 
-```r
-install.packages(c(
-  "shiny", "ggplot2", "dplyr", "tidyr", "magrittr",
-  "readxl", "openxlsx", "colourpicker", "rhandsontable", "patchwork"
-))
-shiny::runApp("app.R")
-```
+| Code | Meaning |
+|------|---------|
+| `S`  | Sufficiently reported / adequate |
+| `I`  | Insufficiently reported |
+| `N`  | Not reported / not adequate |
+| `NA` | Not applicable |
 
-## Deploy for free on shinyapps.io
+The full wording (for example "Sufficiently reported / adequate") is also
+accepted. **Every cell must be filled in.** If any study name or judgement is
+blank, the app shows an error listing what is missing and does not generate
+the plots until it is completed.
 
-```r
-install.packages("rsconnect")
-rsconnect::setAccountInfo(name='YOUR_ACCOUNT', token='YOUR_TOKEN', secret='YOUR_SECRET')
-rsconnect::deployApp(appDir = "path/to/robdemat_app")
-```
+### The nine RoBDEMAT items
 
-Install every package above locally *before* deploying — shinyapps.io
-only bundles packages it detects in your local library at deploy
-time. If the app fails to start there, run
-`rsconnect::showLogs(appName = "your-app-name")` for the real error.
+| Domain | Items |
+|--------|-------|
+| D1: Bias in planning and allocation | 1.1 Control group; 1.2 Randomization of samples; 1.3 Sample size rationale and reporting |
+| D2: Bias in sample/specimen preparation | 2.1 Standardization of samples/materials; 2.2 Identical experimental conditions |
+| D3: Bias in outcome assessment | 3.1 Testing procedures & outcomes; 3.2 Blinding of test operator |
+| D4: Bias in data treatment and outcome reporting | 4.1 Statistical analysis; 4.2 Reporting of study outcomes |
 
-## Changelog (this revision)
+### Editing in the app
 
-- Home tab: the "How to use" steps now sit on the left with an
-  **Example figure** on the right showing what the final product looks
-  like. The image is `www/example_figure.png` (a `www` folder next to
-  `app.R`; Shiny serves it automatically). The bundled image is a
-  stand-in illustration — replace it with a real export from the app
-  (same file name) and the Home page picks it up. If the file is
-  missing, a dashed placeholder is shown instead. Remember to include
-  the `www` folder when deploying.
+After uploading, your studies appear in an editable table:
 
-## Notes / possible extensions
+- **Study names:** click a name to edit it.
+- **Judgements:** click any assessment cell and choose from the four options.
+- **Add a study:** click "Add study" to add a new row.
+- **Edit or remove rows:** right-click a row to insert or remove it.
 
-- The editable table only appears after a file is uploaded — say
-  the word if you'd like a "start from blank" option instead.
-- Multi-file upload to compare two reviewers' judgements and flag
-  disagreements.
-- A combined PDF/report export bundling both plots and the data
-  table.
+## The figures
+
+**Traffic light plot** - one row per study, one column per item, grouped by
+domain, with a footnote listing every domain and item and a legend for the
+judgements.
+
+**Summary plot** - a stacked bar for each item showing how many studies fall
+into each judgement (study counts are printed on the bars).
+
+### Customisation (both plots)
+
+- Font and font size (8-16 pt)
+- Colours for each judgement (colour picker or hex code), with a *Default*
+  and a *Colour-blind friendly* palette
+- Legend text for each judgement, and the option to hide a judgement from
+  the legend if it is not used
+- Traffic light plot only: circle size and the heights of the header and
+  study rows
+
+### Exporting
+
+- **PNG or TIFF**, at the DPI you choose.
+- The size is set **automatically** to fit the whole figure. Tick
+  **Adjust manually** to set the width and height yourself.
+
+## Running the app locally
+
+1. Install [R](https://cran.r-project.org) (and, optionally,
+   [RStudio](https://posit.co/download/rstudio-desktop/)).
+2. Install the required packages once:
+
+   ```r
+   install.packages(c(
+     "shiny", "ggplot2", "dplyr", "tidyr", "magrittr", "patchwork",
+     "readxl", "openxlsx", "colourpicker", "rhandsontable"
+   ))
+   ```
+
+3. Put `app.R` and the `www` folder (containing `example_figure.png`) in the
+   same folder, then run:
+
+   ```r
+   shiny::runApp("path/to/that/folder")
+   ```
+
+## How to cite
+
+If this tool was useful for your research, please consider citing it. Citation
+details are in `CITATION.cff` (GitHub's "Cite this repository" button uses
+it) and on the app's Home tab, which also offers `.ris` and `.nbib`
+downloads.
+
+Please also cite the RoBDEMAT tool itself:
+
+> Delgado AHS, Sauro S, Lima AF, et al. RoBDEMAT: A risk of bias tool and
+> guideline to support reporting of pre-clinical dental materials research
+> and assessment of systematic reviews. *J Dent.* 2022;127:104350.
+> https://doi.org/10.1016/j.jdent.2022.104350
+
+## Credits
+
+- Developed by Jonathan Jun Xian, Yuen (DDS).
+- Inspired by [robvis](https://github.com/mcguinlu/robvis) (McGuinness &
+  Higgins), an R package and web app for visualising risk-of-bias
+  assessments.
+- The RoBDEMAT tool was developed by Delgado et al. (2022).
+
+## Licence
+
+This project is released under the [MIT Licence](LICENSE).
