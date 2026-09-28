@@ -234,7 +234,7 @@ CITATION <- list(
   title = "RoBDEMAT Visualizer: a web tool for producing risk-of-bias assessment figures for pre-clinical dental materials research",
   year = "2026",
   version = "1.0",
-  url = "https://example.com/robdemat-visualizer"
+  url = "https://jonathanyuen.shinyapps.io/RoBDEMATvis/"
 )
 citation_text <- function() {
   with(CITATION, paste0(author_short, ". ", title, " [computer software]. Version ", version, ". ",
