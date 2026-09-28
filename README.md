@@ -107,6 +107,8 @@ into each judgement (study counts are printed on the bars).
 
 If this tool was useful for your research, please consider citing it. Citation details are on the app's Home tab, which also offers `.ris` and `.nbib` downloads.
 
+>Yuen JJX. RoBDEMAT Visualizer: a web tool for producing risk-of-bias >assessment figures for pre-clinical dental materials research [computer >software]. Version 1.0. 2026. >https://jonathanyuen.shinyapps.io/RoBDEMATvis/
+
 ## Credits
 
 - Developed by Jonathan Jun Xian, Yuen (DDS).
