@@ -227,7 +227,8 @@ bias_table <- function() {
   )
 }
 
-# Placeholder ("dummy") citation for the tool -- replace with the final details.
+# Citation for the tool (cited by its web address until a paper is published;
+# update url / year / version here and the Home tab text, .ris and .nbib all follow).
 CITATION <- list(
   author_short = "Yuen JJX",
   author_full  = "Yuen, Jonathan Jun Xian",
@@ -1019,6 +1020,7 @@ server <- function(input, output, session) {
       theme_minimal(base_family = input$sm_font, base_size = sm_fs) +
       theme(
         axis.text.x = element_text(angle = 0, hjust = 0.5, size = sm_fs),
+        axis.title.x = element_text(margin = margin(t = 12)),   # gap between the axis numbers and "% of studies"
         legend.position = "bottom",
         legend.text = element_text(size = sm_fs),
         panel.grid.major.x = element_blank()
