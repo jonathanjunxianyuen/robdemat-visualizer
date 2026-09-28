@@ -105,17 +105,7 @@ into each judgement (study counts are printed on the bars).
 
 ## How to cite
 
-If this tool was useful for your research, please consider citing it. Citation
-details are in `CITATION.cff` (GitHub's "Cite this repository" button uses
-it) and on the app's Home tab, which also offers `.ris` and `.nbib`
-downloads.
-
-Please also cite the RoBDEMAT tool itself:
-
-> Delgado AHS, Sauro S, Lima AF, et al. RoBDEMAT: A risk of bias tool and
-> guideline to support reporting of pre-clinical dental materials research
-> and assessment of systematic reviews. *J Dent.* 2022;127:104350.
-> https://doi.org/10.1016/j.jdent.2022.104350
+If this tool was useful for your research, please consider citing it. Citation details are on the app's Home tab, which also offers `.ris` and `.nbib` downloads.
 
 ## Credits
 
